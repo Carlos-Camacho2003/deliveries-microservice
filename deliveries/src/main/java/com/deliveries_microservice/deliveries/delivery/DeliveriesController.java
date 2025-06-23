@@ -1,4 +1,4 @@
-package com.deliveries_microservice.deliveries;
+package com.deliveries_microservice.deliveries.delivery;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
