@@ -8,7 +8,7 @@ on:
     types: [opened, synchronize, reopened]
 
 env:
-  IMAGE_NAME: ${{ secrets.DOCKER_USERNAME }}/3d5566f52204:${{ github.sha }}
+  IMAGE_NAME: ${{ secrets.DOCKER_USERNAME }}/deliveries-microservice:${{ github.sha }}
 
 jobs:
   build:
@@ -62,10 +62,10 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
 
       - name: Build Docker image
-        run: docker build -t $deliveries-microservice .
+        run: docker build -t $IMAGE_NAME .
 
       - name: Push Docker image
-        run: docker push $deliveries-microservice
+        run: docker push $IMAGE_NAME
 
       - name: Tag as latest and push
         run: |
