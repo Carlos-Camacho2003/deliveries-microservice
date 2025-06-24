@@ -1,6 +1,7 @@
 package com.deliveries_microservice.deliveries.infraestructure.controller;
 
 import com.deliveries_microservice.deliveries.application.dto.DeliveriesDTO;
+import com.deliveries_microservice.deliveries.application.dto.DeliveryCreationRequest;
 import com.deliveries_microservice.deliveries.application.service.DeliveriesService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -40,8 +41,16 @@ public class DeliveriesController {
     @PostMapping
     public ResponseEntity<DeliveriesDTO> createDelivery(
             @Parameter(description = "Datos de la entrega a crear", required = true)
-            @RequestBody DeliveriesDTO deliveriesDTO) {
-        DeliveriesDTO savedDelivery = deliveriesService.createDelivery(deliveriesDTO);
+            @RequestBody DeliveryCreationRequest request) {
+
+        DeliveriesDTO dto = new DeliveriesDTO();
+        dto.setOrderId(request.getOrderId().toString());
+        dto.setDeliveryAddress(request.getDeliveryAddress());
+        dto.setCity(request.getCity());
+        dto.setContactPhone(request.getContactPhone());
+        dto.setDeliveryStatus("PENDIENTE");
+
+        DeliveriesDTO savedDelivery = deliveriesService.createDelivery(dto);
         return new ResponseEntity<>(savedDelivery, HttpStatus.CREATED);
     }
 

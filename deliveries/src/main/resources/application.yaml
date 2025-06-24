@@ -1,6 +1,6 @@
 eureka:
   instance:
-    appname: sales-microservice
+    appname: delivery-microservice
     instance-id: ${spring.application.name}:${server.port}
   client:
     service-url:

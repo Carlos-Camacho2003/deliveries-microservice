@@ -18,7 +18,7 @@ public class Deliveries {
     private Long id;
 
     @Column(name = "orden_id", nullable = false)
-    private Integer orderId;
+    private String orderId;
 
     @Column(name = "direccion_entrega", nullable = false)
     private String deliveryAddress;

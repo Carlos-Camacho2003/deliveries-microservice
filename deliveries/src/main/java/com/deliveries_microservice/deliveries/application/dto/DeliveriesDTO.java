@@ -16,8 +16,12 @@ public class DeliveriesDTO {
     @Schema(description = "ID único de la entrega", example = "1")
     private Long id;
 
-    @Schema(description = "ID de la orden asociada", example = "1001", required = true)
-    private Integer orderId;
+    @Schema(
+            description = "ID de la orden asociada (UUID)",
+            example = "98253a22-0b92-4934-9d7a-a12472838ad9",
+            required = true
+    )
+    private String orderId;
 
     @Schema(description = "Dirección de entrega completa", example = "Calle 123 #45-67", required = true)
     private String deliveryAddress;
