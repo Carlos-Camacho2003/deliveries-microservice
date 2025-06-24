@@ -62,10 +62,10 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
 
       - name: Build Docker image
-        run: docker build -t $IMAGE_NAME .
+        run: docker build -t $deliveries-microservice .
 
       - name: Push Docker image
-        run: docker push $IMAGE_NAME
+        run: docker push $deliveries-microservice
 
       - name: Tag as latest and push
         run: |
