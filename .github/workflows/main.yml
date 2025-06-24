@@ -62,7 +62,7 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
 
       - name: Build Docker image
-        run: docker build -t $IMAGE_NAME .
+        run: docker build -t $IMAGE_NAME ./deliveries
 
       - name: Push Docker image
         run: docker push $IMAGE_NAME
@@ -71,3 +71,4 @@ jobs:
         run: |
           docker tag $IMAGE_NAME ${{ secrets.DOCKER_USERNAME }}/deliveries-microservice:latest
           docker push ${{ secrets.DOCKER_USERNAME }}/deliveries-microservice:latest
+          
