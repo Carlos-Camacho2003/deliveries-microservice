@@ -91,7 +91,7 @@ public class DeliveriesController {
 
     @Operation(
             summary = "Actualizar entrega",
-            description = "Actualiza todos los datos de una entrega existente usando su ID"
+            description = "Actualiza todos los datos de una entrega existente usando el ID"
     )
     @ApiResponses({
             @ApiResponse(
