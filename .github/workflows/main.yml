@@ -16,9 +16,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Mostrar errores de prueba
-        if: failure()
-        run: cat deliveries/target/surefire-reports/*.txt || true
+     
         
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -75,6 +73,10 @@ jobs:
 
       - name: Push Docker image
         run: docker push $IMAGE_NAME
+        
+      - name: Mostrar errores de prueba
+        if: failure()
+        run: cat deliveries/target/surefire-reports/*.txt || true
 
       - name: Tag as latest and push
         run: |
