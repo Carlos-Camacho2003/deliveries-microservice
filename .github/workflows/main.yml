@@ -32,7 +32,7 @@ jobs:
           key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
           restore-keys: |
             ${{ runner.os }}-m2
-            
+
       - name: Build with Maven
         run: mvn clean package
 
@@ -44,8 +44,7 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-sonar
 
-      - name: Build and analyze with SonarCloud
-        working-directory: deliveries
+      - name: Analyze with SonarCloud
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         run: |
@@ -65,7 +64,7 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
 
       - name: Build Docker image
-        run: docker build -t $IMAGE_NAME ./deliveries
+        run: docker build -t $IMAGE_NAME .
 
       - name: Push Docker image
         run: docker push $IMAGE_NAME
@@ -74,4 +73,3 @@ jobs:
         run: |
           docker tag $IMAGE_NAME ${{ secrets.DOCKER_USERNAME }}/deliveries-microservice:latest
           docker push ${{ secrets.DOCKER_USERNAME }}/deliveries-microservice:latest
-          
