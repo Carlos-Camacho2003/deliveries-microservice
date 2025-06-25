@@ -34,6 +34,7 @@ jobs:
             ${{ runner.os }}-m2
 
       - name: Build with Maven
+        working-directory: deliveries
         run: mvn clean package
 
       - name: Cache SonarCloud packages
@@ -45,6 +46,7 @@ jobs:
             ${{ runner.os }}-sonar
 
       - name: Analyze with SonarCloud
+        working-directory: deliveries
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         run: |
@@ -64,6 +66,7 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
 
       - name: Build Docker image
+        working-directory: deliveries
         run: docker build -t $IMAGE_NAME .
 
       - name: Push Docker image
