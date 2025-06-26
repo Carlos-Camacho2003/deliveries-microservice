@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: deliveries-service
+spec:
+  selector:
+    app: deliveries-service
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8080

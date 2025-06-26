@@ -1,0 +1,54 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deliveries-service
+  labels:
+    app: deliveries-service
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: deliveries-service
+  template:
+    metadata:
+      labels:
+        app: deliveries-service
+    spec:
+      containers:
+        - name: deliveries-service
+          image: kevinmar2003/deliveries-microservice:latest
+          env:
+            - name: JWT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: global-secrets
+                  key: JWT_SECRET
+            - name: DB_URL
+              valueFrom:
+                secretKeyRef:
+                  name: neon-db-secret
+                  key: DB_URL
+            - name: DB_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: neon-db-secret
+                  key: DB_USERNAME
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: neon-db-secret
+                  key: DB_PASSWORD
+            - name: EUREKA_CLIENT_SERVICEURL_DEFAULTZONE
+              valueFrom:
+                configMapKeyRef:
+                  name: eureka-config
+                  key: defaultZone
+          ports:
+            - containerPort: 8080
+          resources:
+            requests:
+              cpu: "200m"
+              memory: "256Mi"
+            limits:
+              cpu: "500m"
+              memory: "512Mi"
